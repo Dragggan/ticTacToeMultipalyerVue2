@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: 'Game'
+  name: 'Game',
+  async mounted() {
+    await axios.get;
+  }
 };
 </script>
 
