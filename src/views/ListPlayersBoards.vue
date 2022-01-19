@@ -1,10 +1,10 @@
 <template>
-  <div>CreatePlayer</div>
+  <div>ListPlayersBoards</div>
 </template>
 
 <script>
 export default {
-  name: 'CreatePlayer'
+  name: 'ListPlayersBoards'
 };
 </script>
 
