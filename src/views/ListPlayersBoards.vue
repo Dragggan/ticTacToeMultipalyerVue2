@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { io } from 'socket.io-client';
+import io from 'socket.io-client';
 import { CREATE_BOARD } from '../store/action-types';
 import { mapGetters } from 'vuex';
 
@@ -22,11 +22,13 @@ export default {
   name: 'ListPlayersBoards',
   data() {
     return {
-      error: null
+      error: null,
+      connection: null
     };
   },
   methods: {
     enterRoom(boardid) {
+      let socket = io();
       socket.emit('join_room', boardid, responseCode => {
         console.log(`Ack: ${responseCode}`);
         console.log(responseCode);
@@ -43,14 +45,20 @@ export default {
   },
   mounted() {
     this.$store.dispatch(CREATE_BOARD);
+
     if (this.playerGet) {
       const { id } = this.playerGet;
-      const socket = io(process.env.VUE_APP_BASE_URL, {
+      const socket = io('http://127.0.0.1:9898', {
         reconnectionDelayMax: 10000,
         query: {
           id
         }
       });
+      socket.on('connection', () => {
+        console.log('%c  "aa"==> ', 'color:red;font-size:12px;', 'aa');
+      });
+
+      console.log('%c  socket==> ', 'color:red;font-size:12px;', socket);
     }
   }
 };
