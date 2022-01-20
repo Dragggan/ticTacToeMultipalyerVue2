@@ -16,6 +16,7 @@ export default new Vuex.Store({
   mutations: {
     [MUT.SET_PLAYER](state, payload) {
       state.player = payload;
+      localStorage.player = payload.name;
     },
     [MUT.BOARDS](state, payload) {
       state.boards = payload;
@@ -74,7 +75,7 @@ export default new Vuex.Store({
       return state.boards;
     },
     playerGet(state) {
-      return state.player;
+      return state.player ?? { name: localStorage.player };
     },
 
   },
